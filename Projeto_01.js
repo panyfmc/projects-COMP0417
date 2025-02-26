@@ -52,7 +52,14 @@ const numAlunosPorCurso = (turma) => {
 }
 console.log(numAlunosPorCurso(turma))
 
-
 //PARTE-9 [EDIÇÃO DE ALUNOS]
+// Permita a edição dos detalhes de um(a) aluno(a), como nome, matricula, idade ou curso.
+const editarAluno = (turma, nome, novosDetalhes) => {
+    return Object.freeze(turma.map(aluno => aluno.nome == nome 
+        ? {...aluno, ...novosDetalhes} : aluno
+    ))
+}
 
+const turmaAtualizada = editarAluno(turma, "Kalil", { nome: "Bruno", idade: 58 })
+console.log(turmaAtualizada)
 
