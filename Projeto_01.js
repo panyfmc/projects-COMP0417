@@ -1,5 +1,3 @@
-//Teste de projeto git commit -a -m "ALTERAÇÃO"
-//                 git push origin master
 
 // PARTE-1 [DEFINIÇÃO DO REGISTRO]
 const aluno = (nome, idade, matricula, curso) => Object.freeze({ nome, idade, matricula, curso })
