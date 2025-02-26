@@ -44,6 +44,10 @@ const removerAluno = (turma, nome) => {
 
 //PARTE-7 [ORDENAÇÃO DOS ALUNOS]
 
+const ordenarAlunosPorMatricula = (turma) => {
+    return Object.freeze([...turma].sort((a, b) => a.matricula - b.matricula));
+};
+
 //PARTE-8 [CONTAGEM DE ALUNOS POR CURSO]
 
 //PARTE-9 [EDIÇÃO DE ALUNOS]
