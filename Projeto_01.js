@@ -2,7 +2,7 @@
 //                 git push origin master
 
 // PARTE-1 [DEFINIÇÃO DO REGISTRO]
-const aluno = (nome, idade, matricula, curso) => Object.freeze({ nome, idade, matricula, curso });
+const aluno = (nome, idade, matricula, curso) => Object.freeze({ nome, idade, matricula, curso })
 
 // PARTE-2 [CRIAÇÃO DO REGISTRO]
 const turma = Object.freeze([
@@ -14,16 +14,16 @@ const turma = Object.freeze([
 
 // PARTE-3 [ADIÇÃO DE ALUNOS]
 const adicionarAluno = (nome, idade, matricula, curso) => {
-    const alunoNovo = aluno(nome, idade, matricula, curso);
-    return Object.freeze([...turma, alunoNovo]);
-};
+    const alunoNovo = aluno(nome, idade, matricula, curso)
+    return Object.freeze([...turma, alunoNovo])
+}
 
 // PARTE-4 [LISTAGEM DE ALUNOS]
 const listagemAlunos = (turma) => {
     turma.forEach(aluno => {
-        console.log(`Nome: ${aluno.nome}, Idade: ${aluno.idade}, Matrícula: ${aluno.matricula}, Curso: ${aluno.curso}`);
-    });
-};
+        console.log(`Nome: ${aluno.nome}, Idade: ${aluno.idade}, Matrícula: ${aluno.matricula}, Curso: ${aluno.curso}`)
+    })
+}
 
 //PARTE-5 [BUSCA POR CURSO]
 
