@@ -19,7 +19,7 @@ const adicionarAluno = (nome, idade, matricula, curso) => {
 // PARTE-4 [LISTAGEM DE ALUNOS]
 const listagemAlunos = (turma) => {
     turma.forEach(aluno => {
-        console.log(`Nome: ${aluno.nome}, Idade: ${aluno.idade}, Matrícula: ${aluno.matricula}, Curso: ${aluno.curso}`)
+        //console.log(`Nome: ${aluno.nome}, Idade: ${aluno.idade}, Matrícula: ${aluno.matricula}, Curso: ${aluno.curso}`)
     })
 }
 
@@ -42,4 +42,17 @@ const ordenarAlunosPorMatricula = (turma) => {
 
 //PARTE-8 [CONTAGEM DE ALUNOS POR CURSO]
 
+const numAlunosPorCurso = (turma) => {
+    // Object.freeze impede que novas propriedades sejam adicionadas a ele
+    return Object.freeze(turma.reduce((acc, aluno) => {
+        acc[aluno.curso] = (acc[aluno.curso] || 0) + 1
+        return acc
+        
+    }, {}))
+}
+console.log(numAlunosPorCurso(turma))
+
+
 //PARTE-9 [EDIÇÃO DE ALUNOS]
+
+
