@@ -25,12 +25,6 @@ const listagemAlunos = (turma) => {
     })
 }
 
-//Gente a listagem dos alunos da pra fazer com map também para vocês verem o que acham melhor.
-//const listagemAlunos = (turma) => {
-   // turma.map(aluno => {
-        //console.log(`Nome: ${aluno.nome}, Idade: ${aluno.idade}, Matrícula: ${aluno.matricula}, Curso: ${aluno.curso}`);
-   // });
-//};
 //PARTE-5 [BUSCA POR CURSO]
 const buscaPorCurso = (turma, curso) => {
     return Object.freeze(turma.filter(aluno => aluno.curso === curso));
