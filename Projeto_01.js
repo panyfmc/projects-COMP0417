@@ -25,19 +25,19 @@ const listagemAlunos = (turma) => {
 
 //PARTE-5 [BUSCA POR CURSO]
 const buscaPorCurso = (turma, curso) => {
-    return Object.freeze(turma.filter(aluno => aluno.curso === curso));
+    return Object.freeze(turma.filter(aluno => aluno.curso === curso))
 };
 
 //PARTE-6 [REMOÇÃO DE ALUNOS]
 
 const removerAluno = (turma, nome) => {
-    return Object.freeze(turma.filter(aluno => aluno.nome !== nome));
+    return Object.freeze(turma.filter(aluno => aluno.nome !== nome))
 };
 
 //PARTE-7 [ORDENAÇÃO DOS ALUNOS]
 
 const ordenarAlunosPorMatricula = (turma) => {
-    return Object.freeze([...turma].sort((a, b) => a.matricula - b.matricula));
+    return Object.freeze([...turma].sort((a, b) => a.matricula - b.matricula))
 };
 
 //PARTE-8 [CONTAGEM DE ALUNOS POR CURSO]
@@ -59,25 +59,40 @@ const editarAluno = (turma, nome, novosDetalhes) => {
     ))
 }
 
-console.log ("Turma Original\n", turma)
+// Registro da turma
+console.log("Turma Original\n", turma)
 
-const novaTurma = adicionarAluno("Carlos", 23, 2024004, "CC");
-console.log("\nTurma após adição de Carlos:", novaTurma);
+// Adicionar aluno à turma
+const novaTurma = adicionarAluno("Carlos", 23, 2024004, "CC")
+console.log("\nTurma após adição de Carlos:", novaTurma)
 
-console.log("\nListagem de alunos:");
-listagemAlunos(turma);
+// Listando detalhes de cada aluno da turma
+console.log("\nListagem de alunos:", turma)
+listagemAlunos(turma)
 
-const alunosCC = buscaPorCurso(turma, "CC");
-console.log("\nAlunos do curso CC:", alunosCC);
+// Alunos de mesmo curso
+const alunosCC = buscaPorCurso(turma, "CC")
+console.log("\nAlunos do curso CC:", alunosCC)
 
-const turmaSemKalil = removerAluno(turma, "Kalil");
-console.log("\nTurma após remoção de Kalil:", turmaSemKalil);
+const alunosEC = buscaPorCurso(turma, "EC")
+console.log("\nAlunos do curso EC:", alunosEC)
 
-const turmaOrdenada = ordenarAlunosPorMatricula(turma);
-console.log("\nTurma ordenada por matrícula:", turmaOrdenada);
+const alunosSI = buscaPorCurso(turma, "SI")
+console.log("\nAlunos do curso SI:", alunosSI)
 
-const contagemDeAlunosDosCursos = numAlunosPorCurso(turma);
-console.log("\nNúmero de alunos por curso:", contagemDeAlunosDosCursos);
+// Exemplo de curso que não está na turma
+const alunosFIS = buscaPorCurso(turma, "FIS")
+console.log("\nAlunos do curso Física:", alunosFIS)
 
-const turmaAtualizada = editarAluno(turma, "Kalil", { nome: "Bruno", idade: 58 });
-console.log("\nTurma após edição do aluno Kalil:", turmaAtualizada);
+// Remoção de um aluno na turma
+const turmaSemKalil = removerAluno(turma, "Kalil")
+console.log("\nTurma após remoção de Kalil:", turmaSemKalil)
+
+const turmaOrdenada = ordenarAlunosPorMatricula(turma)
+console.log("\nTurma ordenada por matrícula:", turmaOrdenada)
+
+const contagemDeAlunosDosCursos = numAlunosPorCurso(turma)
+console.log("\nNúmero de alunos por curso:", contagemDeAlunosDosCursos)
+
+const turmaAtualizada = editarAluno(turma, "Kalil", { nome: "Bruno", idade: 58, matricula: 1996003, curso: "EC" })
+console.log("\nTurma após edição do aluno Kalil:", turmaAtualizada)
