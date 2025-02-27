@@ -5,9 +5,9 @@ const aluno = (nome, idade, matricula, curso) => Object.freeze({ nome, idade, ma
 // PARTE-2 [CRIAÇÃO DO REGISTRO]
 const turma = Object.freeze([
     aluno("Helen", 22, 2021000, "CC"),
-    aluno("Paula", 20, 2022001, "SI"),
-    aluno("Breno", 22, 2023002, "EC"),
-    aluno("Kalil", 78, 1978003, "CC")
+    aluno("Paula", 20, 2022001, "EC"),
+    aluno("Breno", 22, 2023002, "CC"),
+    aluno("Kalil", 78, 1978003, "SI")
 ]);
 
 // PARTE-3 [ADIÇÃO DE ALUNOS]
@@ -19,7 +19,7 @@ const adicionarAluno = (nome, idade, matricula, curso) => {
 // PARTE-4 [LISTAGEM DE ALUNOS]
 const listagemAlunos = (turma) => {
     turma.forEach(aluno => {
-        //console.log(`Nome: ${aluno.nome}, Idade: ${aluno.idade}, Matrícula: ${aluno.matricula}, Curso: ${aluno.curso}`)
+        
     })
 }
 
@@ -50,7 +50,6 @@ const numAlunosPorCurso = (turma) => {
         
     }, {}))
 }
-console.log(numAlunosPorCurso(turma))
 
 //PARTE-9 [EDIÇÃO DE ALUNOS]
 // Permita a edição dos detalhes de um(a) aluno(a), como nome, matricula, idade ou curso.
