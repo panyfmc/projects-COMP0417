@@ -88,11 +88,14 @@ console.log("\nAlunos do curso Física:", alunosFIS)
 const turmaSemKalil = removerAluno(turma, "Kalil")
 console.log("\nTurma após remoção de Kalil:", turmaSemKalil)
 
+// Definindo turma por ordem de matrícula
 const turmaOrdenada = ordenarAlunosPorMatricula(turma)
 console.log("\nTurma ordenada por matrícula:", turmaOrdenada)
 
+// Contabilizando a quantidade de alunos em cada curso
 const contagemDeAlunosDosCursos = numAlunosPorCurso(turma)
 console.log("\nNúmero de alunos por curso:", contagemDeAlunosDosCursos)
 
+// Substituindo um aluno por outro na turma
 const turmaAtualizada = editarAluno(turma, "Kalil", { nome: "Bruno", idade: 58, matricula: 1996003, curso: "EC" })
 console.log("\nTurma após edição do aluno Kalil:", turmaAtualizada)
