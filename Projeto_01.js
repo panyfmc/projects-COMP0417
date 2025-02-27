@@ -60,6 +60,25 @@ const editarAluno = (turma, nome, novosDetalhes) => {
     ))
 }
 
-const turmaAtualizada = editarAluno(turma, "Kalil", { nome: "Bruno", idade: 58 })
-console.log(turmaAtualizada)
+console.log ("Turma Original\n", turma)
 
+const novaTurma = adicionarAluno("Carlos", 23, 2024004, "CC");
+console.log("\nTurma após adição de Carlos:", novaTurma);
+
+console.log("\nListagem de alunos:");
+listagemAlunos(turma);
+
+const alunosCC = buscaPorCurso(turma, "CC");
+console.log("\nAlunos do curso CC:", alunosCC);
+
+const turmaSemKalil = removerAluno(turma, "Kalil");
+console.log("\nTurma após remoção de Kalil:", turmaSemKalil);
+
+const turmaOrdenada = ordenarAlunosPorMatricula(turma);
+console.log("\nTurma ordenada por matrícula:", turmaOrdenada);
+
+const contagemDeAlunosDosCursos = numAlunosPorCurso(turma);
+console.log("\nNúmero de alunos por curso:", contagemDeAlunosDosCursos);
+
+const turmaAtualizada = editarAluno(turma, "Kalil", { nome: "Bruno", idade: 58 });
+console.log("\nTurma após edição do aluno Kalil:", turmaAtualizada);
