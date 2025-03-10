@@ -18,7 +18,9 @@ const adicionarAluno = (nome, idade, matricula, curso) => {
 
 // PARTE-4 [LISTAGEM DE ALUNOS]
 const listagemAlunos = (turma) => {
-    turma.forEach(aluno => {
+    turma.map(aluno => {
+        console.log(nome: ${aluno.nome}, Idade: ${aluno.idade},
+        Matrícula : ${aluno.matricula}, Curso: ${aluno.curso})
         
     })
 }
