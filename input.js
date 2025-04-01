@@ -118,5 +118,5 @@ document.addEventListener("keydown", (evento) => { // Adiciona um  evento para c
 
 const verificarVitoria = (estado) => 
     estado.board.some(valor => valor === 2048) 
-  ? { ...estado, mensagem: "You WIN!" }  // Quando o valor final for 2048, define mensagem de vitória
+  ? { ...estado, mensagem: "Você Ganhou!" }  // Quando o valor final for 2048, define mensagem de vitória
         : estado;
