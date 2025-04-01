@@ -55,9 +55,9 @@ const moverBaixo = (estado)=>{
     let novoScore = score
     for(let coluna = 0; coluna< 4; coluna++){
         const{board,score} = estado
-        const colValores = [board[coluna], board[coluna +4],board[coluna + 8], borad[coluna + 12]]
+        const colValores = [board[coluna], board[coluna +4],board[coluna + 8], board[coluna + 12]]
         const filtrada = colValores.filter(num => num !== 0)
-        const preenchida = filtrada.fill(0).concat(Array(4 - filtrada.leenght)) //preenche com zero no inicio
+        const preenchida = filtrada.fill(0)(Array(4 - filtrada.length).fill(0).concat(filtrada)) //preenche com zero no inicio
         const {novaColuna , novaPontuacao} = combinarColuna(preenchida,4,novoScore)
         for (let x = 0; x<4;x++){
             novoBoard[coluna + x *4] = novaColuna[x]
