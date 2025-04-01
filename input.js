@@ -30,3 +30,25 @@ const moverEsquedra = (estado) =>{
 
     return{board: novoBoard, score: novoScore}
 }
+
+const combinarLinha = (quadrados, pontuacao) => {
+    // Usa o método reduce para processar o array de quadrados
+    return quadrados.reduce(({ novaLinha, novaPontuacao }, valor, indice, array) => {
+        // Verifica se o índice está dentro do limite da linha e se os valores consecutivos são iguais
+        if (indice < 15 && valor === array[indice + 1]) {
+            return {
+                // Cria uma nova linha combinando os valores e substituindo o segundo valor por 0
+                novaLinha: [...novaLinha.slice(0, indice), valor * 2, 0, ...novaLinha.slice(indice + 2)],
+                // Atualiza a pontuação somando o novo valor combinado
+                novaPontuacao: novaPontuacao + valor * 2
+            };
+        }
+        // Se não houver combinação, mantém a linha e a pontuação sem alterações
+        return { novaLinha, novaPontuacao };
+    }, { 
+        // Inicializa o acumulador com a cópia do array original e a pontuação fornecida
+        novaLinha: [...quadrados], 
+        novaPontuacao: pontuacao 
+    });
+};
+
