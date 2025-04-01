@@ -35,12 +35,12 @@ const moverCima = (estado)=>{
     const novoBoard = [...board]
     let novoScore = score
     for (let coluna = 0; coluna < 4; coluna++) {
-        const { board, score } = estado
+        const {board,score} = estado
         // Pega os valores das colunas e cria um array pra facilitar a remoção dos zeros
         const colValores = [board[coluna], board[coluna + 4], board[coluna + 8], board[coluna + 12]]
         const filtrada = colValores.filter(num => num !== 0)// remove os zeros 
         const preenchida = filtrada.concat(Array(4 - filtrada.length).fill(0))// Preenche com zeros no final
-        const { novaColuna, novaPontuacao } = combinarColuna(preenchida, 4, novoScore) //combina os valores
+        const {novaColuna, novaPontuacao} = combinarColuna(preenchida, 4, novoScore) //combina os valores 4 é o tamanho do tab
         for (let i = 0; i < 4; i++) { //for para atualizar os valores
                 novoBoard[coluna + i * 4] = novaColuna[i]
             }
@@ -49,6 +49,24 @@ const moverCima = (estado)=>{
     
     return { board: novoBoard, score: novoScore }
 }    
+//mesma ideia de mover pra cima porem o zero é preenchido no inicio dando impressão de movimento pra baixo
+const moverBaixo = (estado)=>{
+    const novoBoard = [...board]
+    let novoScore = score
+    for(let coluna = 0; coluna< 4; coluna++){
+        const{board,score} = estado
+        const colValores = [board[coluna], board[coluna +4],board[coluna + 8], borad[coluna + 12]]
+        const filtrada = colValores.filter(num => num !== 0)
+        const preenchida = filtrada.fill(0).concat(Array(4 - filtrada.leenght)) //preenche com zero no inicio
+        const {novaColuna , novaPontuacao} = combinarColuna(preenchida,4,novoScore)
+        for (let x = 0; x<4;x++){
+            novoBoard[coluna + x *4] = novaColuna[x]
+        }
+        novoScore = novaPontuacao
+    }
+}
+
+
 
 
 const combinarLinha = (quadrados, pontuacao) => {
