@@ -102,3 +102,17 @@ const combinarColuna = (quadrados, largura, pontuacao) => {
     });
 };
 
+const controlarTecla = (evento, estado) => {
+    const acoes = { // cada tecla tem uma função correspondente de movimento
+        ArrowLeft: moverEsquedra, // Move os blocos para a esquerda
+        ArrowRight: moverDireita, // Move os blocos para a direita
+        ArrowUp: moverCima,       // Move os blocos para cima
+        ArrowDown: moverBaixo     // Move os blocos para baixo
+    };
+    return acoes[evento.key] ? acoes[evento.key](estado) : estado; // Se a tecla pressionada estiver em "acoes", executa a função correspondente
+};
+
+document.addEventListener("keydown", (evento) => { // Adiciona um  evento para capturar pressionamentos de tecla
+    estado = controlarTecla(evento, estado); // Atualiza o estado do jogo com base na tecla pressionada
+});
+
