@@ -116,3 +116,7 @@ document.addEventListener("keydown", (evento) => { // Adiciona um  evento para c
     estado = controlarTecla(evento, estado); // Atualiza o estado do jogo com base na tecla pressionada
 });
 
+const verificarVitoria = (estado) => 
+    estado.board.some(valor => valor === 2048) 
+  ? { ...estado, mensagem: "You WIN!" }  // Quando o valor final for 2048, define mensagem de vitória
+        : estado;
