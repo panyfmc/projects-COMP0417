@@ -11,7 +11,7 @@ const moverDireita = (estado) => {   //constante para atualizar o estado do jogo
         novoScore = novaPontuacao
     }
 
-    return { board: novoBoard, score }
+    return {board: novoBoard, score : novoScore}
 }
 
 const moverEsquedra = (estado) =>{
@@ -64,6 +64,7 @@ const moverBaixo = (estado)=>{
         }
         novoScore = novaPontuacao
     }
+    return {board: novoBoard, score:novoScore}
 }
 
 
