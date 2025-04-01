@@ -120,3 +120,8 @@ const verificarVitoria = (estado) =>
     estado.board.some(valor => valor === 2048) 
   ? { ...estado, mensagem: "Você Ganhou!" }  // Quando o valor final for 2048, define mensagem de vitória
         : estado;
+
+const verificarGameOver = (estado) =>
+    estado.board.includes(0)
+        ? estado // Se ainda houver zeros, o jogo continua, ou seja, se houver espaços vazios
+        : { ...estado, mensagem: "Você Perdeu!" }; // Se não houver espaços vazios, ou zero, o jogador perdeu
