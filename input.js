@@ -116,15 +116,22 @@ document.addEventListener("keydown", (evento) => { // Adiciona um  evento para c
     estado = controlarTecla(evento, estado); // Atualiza o estado do jogo com base na tecla pressionada
 });
 
-const verificarVitoria = (estado) => 
-    estado.board.some(valor => valor === 2048) 
-  ? { ...estado, mensagem: "Você Ganhou!" }  // Quando o valor final for 2048, define mensagem de vitória
+const verificarVitoria = (estado) =>
+    estado.board.some(valor => valor === 2048)
+        ? { ...estado, mensagem: "Você Ganhou" }  // Quando o valor final for 2048, define mensagem de vitória
         : estado;
 
 const verificarGameOver = (estado) =>
     estado.board.includes(0)
-        ? estado // Se ainda houver zeros, o jogo continua, ou seja, se houver espaços vazios
-        : { ...estado, mensagem: "Você Perdeu!" }; // Se não houver espaços vazios, ou zero, o jogador perdeu
+        ? estado  // Se ainda houver zeros, o jogo continua, ou seja, se houver espaços vazios.
+        : { ...estado, mensagem: "Você Perdeu!" };  // Se não houver espaços vazios, ou zero, o jogador perdeu
 
-const atualizarEstado = (evento, estado) =>
-    verificarGameOver(verificarVitoria(controlarTecla(evento, estado))); // Atualiza o estado do jogo, se houve vitória, derrota.
+
+const atualizarEstado = (evento, estado) => { // Atualiza o estado do jogo, se houve vitória, derrota
+    const novoEstado = verificarGameOver(verificarVitoria(controlarTecla(evento, estado)));
+    if (novoEstado.mensagem) { // Chamamos o clear() para parar o jogo se houver vitória ou derrota
+        clear();  
+    }
+
+    return novoEstado;
+};
