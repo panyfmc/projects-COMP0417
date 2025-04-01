@@ -31,6 +31,26 @@ const moverEsquedra = (estado) =>{
     return{board: novoBoard, score: novoScore}
 }
 
+const moverCima = (estado)=>{
+    const novoBoard = [...board]
+    let novoScore = score
+    for (let coluna = 0; coluna < 4; coluna++) {
+        const { board, score } = estado
+        // Pega os valores das colunas e cria um array pra facilitar a remoção dos zeros
+        const colValores = [board[coluna], board[coluna + 4], board[coluna + 8], board[coluna + 12]]
+        const filtrada = colValores.filter(num => num !== 0)// remove os zeros 
+        const preenchida = filtrada.concat(Array(4 - filtrada.length).fill(0))// Preenche com zeros no final
+        const { novaColuna, novaPontuacao } = combinarColuna(preenchida, 4, novoScore) //combina os valores
+        for (let i = 0; i < 4; i++) { //for para atualizar os valores
+                novoBoard[coluna + i * 4] = novaColuna[i]
+            }
+            novoScore = novaPontuacao
+    }
+    
+    return { board: novoBoard, score: novoScore }
+}    
+
+
 const combinarLinha = (quadrados, pontuacao) => {
     // Usa o método reduce para processar o array de quadrados
     return quadrados.reduce(({ novaLinha, novaPontuacao }, valor, indice, array) => {
