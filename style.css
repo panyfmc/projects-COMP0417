@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+@keyframes jump {
+    0%, 100% { transform: translateY(5px); }
+    50% { transform: translateY(-7px); }
+}
+
+@keyframes blink {
+    50% { opacity: 0; }
+}
+
+body {
+    background-color: #021c4af5;
+    display: flex;
+    justify-content: center;
+    font-family: pixelated, 'Press Start 2P', sans-serif;
+}
+
+h1 {
+    font-size: 40px;
+    line-height: 0.9;
+    color: #f5e100;
+    margin: 0;
+    /* animation: jump 0.4s infinite ease-in-out; */
+}
+
+p, h2 {
+    margin: 0;
+}
+
+.container {
+    width: 468px;
+    margin-top: 30px;
+}
+
+.text-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.text-container p {
+    font-size: 20px;
+    color: #ffffff;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+    line-height: 1.2;
+}
+
+.info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.grid {
+    display: flex;
+    flex-wrap: wrap;
+    width: 456px;
+    height: 456px;
+    background-color: #ff5c8d;
+    border: 7px solid #f5e100;
+    border-radius: 6px;
+    margin-top: 20px;
+}
+
+.grid div {
+    width: 100px;
+    height: 100px;
+    margin: 7px;
+    border-radius: 3px;
+    background-color: #00ffb3;
+    color: #ff007f;
+    font-weight: bold;
+    text-align: center;
+    font-size: 60px;
+    line-height: 1.6;
+}
+
+.score-container {
+    text-align: center;
+    width: 70px;
+    height: 60px;
+    border-radius: 3px;
+    background-color: #00ffb382;
+    color: #ff007f;
+    gap: 5px;
+}
+
+#score {
+    font-size: 30px;
+    animation: blink 0.6s infinite alternate;
+    color: #ff5c8d;
+}
+
+.score-title {
+    margin-top: 5px;
+    font-size: 14px;
+    color: #00d1b2;
+}
+
