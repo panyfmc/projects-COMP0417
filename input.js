@@ -74,7 +74,7 @@ const moverBaixo = (estado)=>{
 
 const combinarLinha = (quadrados, pontuacao) => {
     return quadrados.reduce(({ novaLinha, novaPontuacao }, valor, indice, array) => {    // Usa o método reduce para processar o array de quadrados
-        if (indice < 15 && valor === array[indice + 1]) { // Verifica se o índice está dentro do limite da linha e se os valores consecutivos são iguais
+        if (indice < 3 && valor === array[indice + 1]) { // Verifica se o índice está dentro do limite da linha e se os valores consecutivos são iguais
             return {
                 novaLinha: [...novaLinha.slice(0, indice), valor * 2, 0, ...novaLinha.slice(indice + 2)],   // Cria uma nova linha combinando os valores e substituindo o segundo valor por 0
                 novaPontuacao: novaPontuacao + valor * 2 // Atualiza a pontuação somando o novo valor combinado
@@ -138,19 +138,13 @@ const atualizarEstado = (evento, estado) => { // Atualiza o estado do jogo, se h
     return novoEstado;
 };
 
-const inicializarJogo = () => { 
-    let board = Array(16).fill(0); // Cria um tabuleiro vazio board = adicionarNumeroAleatorio(board); // Adiciona um número aleatório board = adicionarNumeroAleatorio(board); // Adiciona outro número aleatório return { board, score: 0 }; // Retorna o tabuleiro e a pontuação inicial };
-    const adicionarNumeroAleatorio = (board) => { 
-    const casasVazias = board.map((valor, indice) => valor === 0 ? indice : null).filter(v => v !== null); // Encontra posições vazias if (casasVazias.length === 0) return board; // Se não houver espaços vazios, retorna o tabuleiro
-    const indiceAleatorio = casasVazias[Math.floor(Math.random() * casasVazias.length)]; // Escolhe um espaço aleatório
-    const novoValor = Math.random() < 0.9 ? 2 : 4; // Define o valor como 2 (90%) ou 4 (10%)
-    const novoBoard = [...board]; // Copia o tabuleiro
-    novoBoard[indiceAleatorio] = novoValor; // Adiciona o novo número no tabuleiro
-    return novoBoard; // Retorna o tabuleiro atualizado
-};
-
-    return { board, score: 0 }; // Retorna o tabuleiro e a pontuação inicial
-};
+const inicializarJogo = () => {
+    let board = Array(16).fill(0)
+    board = adicionarNumeroAleatorio(board)
+    board = adicionarNumeroAleatorio(board)
+    
+    return { board, score: 0 }
+}
 
                                
     
