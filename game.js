@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", () => {
+/*document.addEventListener("DOMContentLoaded", () => {
     const gridDisplay = document.querySelector(".grid")     // o contêiner do tabuleiro do jogo.
     const scoreDisplay = document.querySelector("#score")   // onde o placar será exibido
     const resultDisplay = document.querySelector("#result") // mensagens como "You WIN!" ou "You LOSE!" serão exibidas.
@@ -35,4 +35,29 @@ document.addEventListener("DOMContentLoaded", () => {
             : generate()) // se não estiver vazia, chama a função generate novamente para gerar um novo número 2.
     
 
-})
+})*/
+
+let estado = inicializarJogo();
+
+function renderizar() {
+    const tabuleiro = document.getElementById("tabuleiro");
+    tabuleiro.innerHTML = "";
+
+    estado.board.forEach(valor => {
+        const celula = document.createElement("div");
+        celula.classList.add("celula");
+        celula.textContent = valor !== 0 ? valor : "";
+        tabuleiro.appendChild(celula);
+    });
+
+    document.getElementById("pontuacao").textContent = estado.score;
+}
+
+document.addEventListener("keydown", (evento) => {
+    estado = controlarTecla(evento, estado);
+    estado.board = adicionarNumeroAleatorio(estado.board);
+    renderizar();
+});
+
+renderizar();
+
