@@ -135,3 +135,18 @@ const atualizarEstado = (evento, estado) => { // Atualiza o estado do jogo, se h
 
     return novoEstado;
 };
+
+const inicializarJogo = () => { 
+    let board = Array(16).fill(0); // Cria um tabuleiro vazio board = adicionarNumeroAleatorio(board); // Adiciona um número aleatório board = adicionarNumeroAleatorio(board); // Adiciona outro número aleatório return { board, score: 0 }; // Retorna o tabuleiro e a pontuação inicial };
+    const adicionarNumeroAleatorio = (board) => { 
+    const casasVazias = board.map((valor, indice) => valor === 0 ? indice : null).filter(v => v !== null); // Encontra posições vazias if (casasVazias.length === 0) return board; // Se não houver espaços vazios, retorna o tabuleiro
+    const indiceAleatorio = casasVazias[Math.floor(Math.random() * casasVazias.length)]; // Escolhe um espaço aleatório
+    const novoValor = Math.random() < 0.9 ? 2 : 4; // Define o valor como 2 (90%) ou 4 (10%)
+    const novoBoard = [...board]; // Copia o tabuleiro
+    novoBoard[indiceAleatorio] = novoValor; // Adiciona o novo número no tabuleiro
+    return novoBoard; // Retorna o tabuleiro atualizado
+
+};
+
+                               
+    
