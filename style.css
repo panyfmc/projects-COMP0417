@@ -56,7 +56,9 @@ p, h2 {
 }
 
 .grid {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
     flex-wrap: wrap;
     width: 456px;
     height: 456px;
@@ -64,6 +66,7 @@ p, h2 {
     border: 7px solid #f5e100;
     border-radius: 6px;
     margin-top: 20px;
+    gap: 7px;
 }
 
 .grid div {
@@ -77,6 +80,9 @@ p, h2 {
     text-align: center;
     font-size: 60px;
     line-height: 1.6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .score-container {

@@ -53,10 +53,13 @@ function renderizar() {
     document.getElementById("pontuacao").textContent = estado.score;
 }
 
-document.addEventListener("keydown", (evento) => {
-    estado = controlarTecla(evento, estado);
-    estado.board = adicionarNumeroAleatorio(estado.board);
-    renderizar();
+document.addEventListener("DOMContentLoaded", () => {
+    const grid = document.querySelector(".grid");
+
+    for (let i = 0; i < 16; i++) {
+        let cell = document.createElement("div");
+        grid.appendChild(cell);
+    }
 });
 
 renderizar();
