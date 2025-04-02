@@ -102,3 +102,53 @@ const combinarColuna = (quadrados, largura, pontuacao) => {
     });
 };
 
+const controlarTecla = (evento, estado) => {
+    const acoes = { // cada tecla tem uma função correspondente de movimento
+        ArrowLeft: moverEsquedra, // Move os blocos para a esquerda
+        ArrowRight: moverDireita, // Move os blocos para a direita
+        ArrowUp: moverCima,       // Move os blocos para cima
+        ArrowDown: moverBaixo     // Move os blocos para baixo
+    };
+    return acoes[evento.key] ? acoes[evento.key](estado) : estado; // Se a tecla pressionada estiver em "acoes", executa a função correspondente
+};
+
+document.addEventListener("keydown", (evento) => { // Adiciona um  evento para capturar pressionamentos de tecla
+    estado = controlarTecla(evento, estado); // Atualiza o estado do jogo com base na tecla pressionada
+});
+
+const verificarVitoria = (estado) =>
+    estado.board.some(valor => valor === 2048)
+        ? { ...estado, mensagem: "Você Ganhou" }  // Quando o valor final for 2048, define mensagem de vitória
+        : estado;
+
+const verificarGameOver = (estado) =>
+    estado.board.includes(0)
+        ? estado  // Se ainda houver zeros, o jogo continua, ou seja, se houver espaços vazios.
+        : { ...estado, mensagem: "Você Perdeu!" };  // Se não houver espaços vazios, ou zero, o jogador perdeu
+
+
+const atualizarEstado = (evento, estado) => { // Atualiza o estado do jogo, se houve vitória, derrota
+    const novoEstado = verificarGameOver(verificarVitoria(controlarTecla(evento, estado)));
+    if (novoEstado.mensagem) { // Chamamos o clear() para parar o jogo se houver vitória ou derrota
+        clear();  
+    }
+
+    return novoEstado;
+};
+
+const inicializarJogo = () => { 
+    let board = Array(16).fill(0); // Cria um tabuleiro vazio board = adicionarNumeroAleatorio(board); // Adiciona um número aleatório board = adicionarNumeroAleatorio(board); // Adiciona outro número aleatório return { board, score: 0 }; // Retorna o tabuleiro e a pontuação inicial };
+    const adicionarNumeroAleatorio = (board) => { 
+    const casasVazias = board.map((valor, indice) => valor === 0 ? indice : null).filter(v => v !== null); // Encontra posições vazias if (casasVazias.length === 0) return board; // Se não houver espaços vazios, retorna o tabuleiro
+    const indiceAleatorio = casasVazias[Math.floor(Math.random() * casasVazias.length)]; // Escolhe um espaço aleatório
+    const novoValor = Math.random() < 0.9 ? 2 : 4; // Define o valor como 2 (90%) ou 4 (10%)
+    const novoBoard = [...board]; // Copia o tabuleiro
+    novoBoard[indiceAleatorio] = novoValor; // Adiciona o novo número no tabuleiro
+    return novoBoard; // Retorna o tabuleiro atualizado
+};
+
+    return { board, score: 0 }; // Retorna o tabuleiro e a pontuação inicial
+};
+
+                               
+    
