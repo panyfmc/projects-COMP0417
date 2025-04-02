@@ -145,7 +145,9 @@ const inicializarJogo = () => {
     const novoBoard = [...board]; // Copia o tabuleiro
     novoBoard[indiceAleatorio] = novoValor; // Adiciona o novo número no tabuleiro
     return novoBoard; // Retorna o tabuleiro atualizado
+};
 
+    return { board, score: 0 }; // Retorna o tabuleiro e a pontuação inicial
 };
 
                                
