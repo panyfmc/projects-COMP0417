@@ -1,4 +1,4 @@
-/*document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", () => {
     const gridDisplay = document.querySelector(".grid")     // o contêiner do tabuleiro do jogo.
     const scoreDisplay = document.querySelector("#score")   // onde o placar será exibido
     const resultDisplay = document.querySelector("#result") // mensagens como "You WIN!" ou "You LOSE!" serão exibidas.
@@ -35,32 +35,5 @@
             : generate()) // se não estiver vazia, chama a função generate novamente para gerar um novo número 2.
     
 
-})*/
-
-let estado = inicializarJogo();
-
-function renderizar() {
-    const tabuleiro = document.getElementById("tabuleiro");
-    tabuleiro.innerHTML = "";
-
-    estado.board.forEach(valor => {
-        const celula = document.createElement("div");
-        celula.classList.add("celula");
-        celula.textContent = valor !== 0 ? valor : "";
-        tabuleiro.appendChild(celula);
-    });
-
-    document.getElementById("pontuacao").textContent = estado.score;
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-    const grid = document.querySelector(".grid");
-
-    for (let i = 0; i < 16; i++) {
-        let cell = document.createElement("div");
-        grid.appendChild(cell);
-    }
-});
-
-renderizar();
+})
 
