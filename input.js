@@ -47,7 +47,7 @@ const moverCima = (estado)=>{
             novoScore = novaPontuacao
     }
     
-    return { board: novoBoard, score: novoScore }
+    return {board: novoBoard, score: novoScore}
 }    
 //mesma ideia de mover pra cima porem o zero é preenchido no inicio dando impressão de movimento pra baixo
 const moverBaixo = (estado)=>{
