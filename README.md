@@ -12,3 +12,4 @@ Aqui serão armazenados os projetos e atividades da matéria, desenvolvidos em g
 
 ## Objetivo  
 Este espaço servirá para organizar e compartilhar os códigos e exercícios realizados ao longo da disciplina.  
+Link do Netlify: https://2048gamepf.netlify.app/
