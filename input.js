@@ -1,3 +1,5 @@
+// Funções de movimento
+
 const moverDireita = (estado) => {   //constante para atualizar o estado do jogo quando precisonar para direita
     const {board, score} = estado
     const novoBoard = []
@@ -14,7 +16,8 @@ const moverDireita = (estado) => {   //constante para atualizar o estado do jogo
     return {board: novoBoard, score : novoScore}
 }
 
-const moverEsquedra = (estado) =>{
+
+const moverEsquerda = (estado) =>{
     const {board, score} = estado
     const novoBoard = []
     let novoScore = score
@@ -30,6 +33,7 @@ const moverEsquedra = (estado) =>{
 
     return{board: novoBoard, score: novoScore}
 }
+
 
 const moverCima = (estado)=>{
     const{board,score} = estado
@@ -50,7 +54,8 @@ const moverCima = (estado)=>{
     
     return {board: novoBoard, score: novoScore}
 }    
-//mesma ideia de mover pra cima porem o zero é preenchido no inicio dando impressão de movimento pra baixo
+
+
 const moverBaixo = (estado)=>{
     const {board,score} = estado
     const novoBoard = [...board]
@@ -70,23 +75,22 @@ const moverBaixo = (estado)=>{
 }
 
 
-
-
 const combinarLinha = (quadrados, pontuacao) => {
     return quadrados.reduce(({ novaLinha, novaPontuacao }, valor, indice, array) => {    // Usa o método reduce para processar o array de quadrados
         if (indice < 3 && valor === array[indice + 1]) { // Verifica se o índice está dentro do limite da linha e se os valores consecutivos são iguais
             return {
                 novaLinha: [...novaLinha.slice(0, indice), valor * 2, 0, ...novaLinha.slice(indice + 2)],   // Cria uma nova linha combinando os valores e substituindo o segundo valor por 0
                 novaPontuacao: novaPontuacao + valor * 2 // Atualiza a pontuação somando o novo valor combinado
-            };
+            }
         }
-        return { novaLinha, novaPontuacao };  // Se não houver combinação, mantém a linha e a pontuação sem alterações
+        return { novaLinha, novaPontuacao }  // Se não houver combinação, mantém a linha e a pontuação sem alterações
     }, { 
         // Inicializa o acumulador com a cópia do array original e a pontuação fornecida
         novaLinha: [...quadrados], 
         novaPontuacao: pontuacao 
-    });
-};
+    })
+}
+
 
 const combinarColuna = (quadrados, largura, pontuacao) => {
     return quadrados.reduce(({ novaColuna, novaPontuacao }, valor, indice, array) => {  // Usa reduce para processar o array de quadrados na vertical
@@ -94,15 +98,16 @@ const combinarColuna = (quadrados, largura, pontuacao) => {
             return {
                 novaColuna: [...novaColuna.slice(0, indice), valor * 2, 0, ...novaColuna.slice(indice + largura + 1)], // Cria uma nova coluna combinando os valores e substituindo o valor abaixo por 0
                 novaPontuacao: novaPontuacao + valor * 2  // Atualiza a pontuação somando o novo valor combinado
-            };
+            }
         }
-        return { novaColuna, novaPontuacao };   // Se não houver combinação, mantém a coluna e a pontuação sem alterações.
+        return { novaColuna, novaPontuacao }   // Se não houver combinação, mantém a coluna e a pontuação sem alterações.
     }, { 
         // Inicializa o objeto acumulador com a cópia do array original e a pontuação fornecida
         novaColuna: [...quadrados], 
         novaPontuacao: pontuacao 
-    });
-};
+    })
+}
+
 
 const controlarTecla = (evento, estado) => {
     const acoes = { // cada tecla tem uma função correspondente de movimento
@@ -110,33 +115,34 @@ const controlarTecla = (evento, estado) => {
         ArrowRight: moverDireita, // Move os blocos para a direita
         ArrowUp: moverCima,       // Move os blocos para cima
         ArrowDown: moverBaixo     // Move os blocos para baixo
-    };
-    return acoes[evento.key] ? acoes[evento.key](estado) : estado; // Se a tecla pressionada estiver em "acoes", executa a função correspondente
-};
+    }
+    return acoes[evento.key] ? acoes[evento.key](estado) : estado // Se a tecla pressionada estiver em "acoes", executa a função correspondente
+}
+
 
 document.addEventListener("keydown", (evento) => { // Adiciona um  evento para capturar pressionamentos de tecla
-    estado = controlarTecla(evento, estado); // Atualiza o estado do jogo com base na tecla pressionada
-});
+    estado = controlarTecla(evento, estado) // Atualiza o estado do jogo com base na tecla pressionada
+})
 
 const verificarVitoria = (estado) =>
     estado.board.some(valor => valor === 2048)
         ? { ...estado, mensagem: "Você Ganhou" }  // Quando o valor final for 2048, define mensagem de vitória
-        : estado;
+        : estado
 
 const verificarGameOver = (estado) =>
     estado.board.includes(0)
         ? estado  // Se ainda houver zeros, o jogo continua, ou seja, se houver espaços vazios.
-        : { ...estado, mensagem: "Você Perdeu!" };  // Se não houver espaços vazios, ou zero, o jogador perdeu
+        : { ...estado, mensagem: "Você Perdeu!" }  // Se não houver espaços vazios, ou zero, o jogador perdeu
 
 
 const atualizarEstado = (evento, estado) => { // Atualiza o estado do jogo, se houve vitória, derrota
-    const novoEstado = verificarGameOver(verificarVitoria(controlarTecla(evento, estado)));
+    const novoEstado = verificarGameOver(verificarVitoria(controlarTecla(evento, estado)))
     if (novoEstado.mensagem) { // Chamamos o clear() para parar o jogo se houver vitória ou derrota
-        clear();  
+        clear()  
     }
 
-    return novoEstado;
-};
+    return novoEstado
+}
 
 const inicializarJogo = () => {
     let board = Array(16).fill(0)
