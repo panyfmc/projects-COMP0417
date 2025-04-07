@@ -1,11 +1,13 @@
+let estado = { board: [], score: 0 } // Inicializa o estado com um tabuleiro vazio e pontuação 0.
+
 document.addEventListener("DOMContentLoaded", () => {
     const gridDisplay = document.querySelector(".grid")     // o contêiner do tabuleiro do jogo.
     const scoreDisplay = document.querySelector("#score")   // onde o placar será exibido
     const resultDisplay = document.querySelector("#result") // mensagens como "You WIN!" ou "You LOSE!" serão exibidas.
     const width = 4     // largura do tabuleiro (4x4).
-    const score = 0     // o placar inicializado com 0.
     const squares = []  // as células do tabuleiro.
-    const generate = (estado) => {
+
+    const generate = () => {
         const emptySquares = squares.filter(square => square.innerHTML == 0)
         if (emptySquares.length === 0) {
             const novoEstado = verificarGameOver(estado)
@@ -20,28 +22,42 @@ document.addEventListener("DOMContentLoaded", () => {
         randomSquare.innerHTML = 2
     }   
 
-   // Cria o tabuleiro do jogo.
-    const createBoard = (i = 0) => {    // i é o índice inicializado com 0.
-        if (i >= width * width) {   // Se o índice for maior ou igual ao número total de células (16),
-            // Gera dois números 2 no tabuleiro
+    const createBoard = (i = 0) => {    
+        if (i >= width * width) {   
             generate() 
             generate()
             return
         }
     
         const square = document.createElement("div")
-        square.innerHTML = 0        // inicializa cada célula com 0.
-        gridDisplay.appendChild(square) // adiciona a célula ao contêiner gridDisplay,
-        squares.push(square)     // adiciona a célula ao array squares.
-    
-        createBoard(i + 1) // Recursividade para o próximo índice.
+        square.innerHTML = 0        
+        gridDisplay.appendChild(square) 
+        squares.push(square)     
+        createBoard(i + 1)
     }
-    
-    createBoard() // cria o tabuleiro chamando a função createBoard.
 
+    const atualizarDOM = () => {
+        squares.forEach((square, index) => {
+            square.innerHTML = estado.board[index] // Atualiza o valor de cada célula com base no estado atual
+            square.className = `tile-${estado.board[index]}` // Adiciona uma classe para estilização (opcional)
+        })
+        scoreDisplay.innerHTML = estado.score // Atualiza o placar
+    }
 
+    createBoard() // Cria o tabuleiro chamando a função createBoard.
 
-    
+    // Inicializa o estado do jogo com dois números aleatórios no tabuleiro.
+    estado.board = squares.map(square => parseInt(square.innerHTML))
+    estado = inicializarJogo()
 
+    document.addEventListener("keydown", (evento) => {
+        const novoEstado = atualizarEstado(evento, estado) // Atualiza o estado do jogo com base na tecla pressionada
+        if (novoEstado !== estado) {
+            estado = novoEstado // Atualiza o estado global
+            atualizarDOM() // Atualiza o DOM para refletir as mudanças no estado
+            generate() // Gera um novo número aleatório após o movimento
+        }
+    })
 })
+
 
