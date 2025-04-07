@@ -111,7 +111,7 @@ const combinarColuna = (quadrados, largura, pontuacao) => {
 
 const controlarTecla = (evento, estado) => {
     const acoes = { // cada tecla tem uma função correspondente de movimento
-        ArrowLeft: moverEsquedra, // Move os blocos para a esquerda
+        ArrowLeft: moverEsquerda, // Move os blocos para a esquerda
         ArrowRight: moverDireita, // Move os blocos para a direita
         ArrowUp: moverCima,       // Move os blocos para cima
         ArrowDown: moverBaixo     // Move os blocos para baixo
