@@ -80,8 +80,8 @@ p, h2 {
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(4, 1fr);
     flex-wrap: wrap;
-    width: 456px;
-    height: 456px;
+    width: 492px;
+    height: 492px;
     background-color: #ff5c8d;
     border: 7px solid #f5e100;
     border-radius: 6px;
