@@ -5,7 +5,20 @@ document.addEventListener("DOMContentLoaded", () => {
     const width = 4     // largura do tabuleiro (4x4).
     const score = 0     // o placar inicializado com 0.
     const squares = []  // as células do tabuleiro.
-
+    const generate = (estado) => {
+        const emptySquares = squares.filter(square => square.innerHTML == 0)
+        if (emptySquares.length === 0) {
+            const novoEstado = verificarGameOver(estado)
+            if (novoEstado.mensagem) {
+                resultDisplay.innerHTML = novoEstado.mensagem
+                clear()
+            }
+            return
+        }
+    
+        const randomSquare = emptySquares[Math.floor(Math.random() * emptySquares.length)]
+        randomSquare.innerHTML = 2
+    }   
 
    // Cria o tabuleiro do jogo.
     const createBoard = (i = 0) => {    // i é o índice inicializado com 0.
@@ -27,12 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
     createBoard() // cria o tabuleiro chamando a função createBoard.
 
 
-   // Gera um número 2 em uma posição aleatória do tabuleiro.
-    const generate = () => 
-        (squares[Math.floor(Math.random() * squares.length)].innerHTML == 0     // Verifica se a célula está vazia,
-            ? (squares[Math.floor(Math.random() * squares.length)].innerHTML = 2, // se estiver vazia, coloca o número 2.
-                checkForGameOver())     // Verifica se o jogo terminou.
-            : generate()) // se não estiver vazia, chama a função generate novamente para gerar um novo número 2.
+
     
 
 })
