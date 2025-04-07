@@ -120,8 +120,8 @@ const controlarTecla = (evento, estado) => {
 }
 
 
-document.addEventListener("keydown", (evento) => { // Adiciona um  evento para capturar pressionamentos de tecla
-    estado = controlarTecla(evento, estado) // Atualiza o estado do jogo com base na tecla pressionada
+document.addEventListener("keydown", (evento) => { 
+    estado = atualizarEstado(evento, estado) // Atualiza o estado do jogo com base na tecla pressionada.
 })
 
 const verificarVitoria = (estado) =>
@@ -144,6 +144,22 @@ const atualizarEstado = (evento, estado) => { // Atualiza o estado do jogo, se h
     return novoEstado
 }
 
+const adicionarNumeroAleatorio = (board) => {
+    const posicoesVazias = board
+        .map((valor, indice) => (valor === 0 ? indice : null))
+        .filter(indice => indice !== null) // Encontra todas as posições vazias no tabuleiro
+
+    if (posicoesVazias.length === 0) return board // Se não houver posições vazias, retorna o tabuleiro inalterado
+
+    const indiceAleatorio = posicoesVazias[Math.floor(Math.random() * posicoesVazias.length)]
+    const novoValor = Math.random() < 0.9 ? 2 : 4 // 90% de chance de ser 2, 10% de chance de ser 4
+
+    const novoBoard = [...board]
+    novoBoard[indiceAleatorio] = novoValor // Insere o novo valor na posição aleatória
+
+    return novoBoard
+};
+
 const inicializarJogo = () => {
     let board = Array(16).fill(0)
     board = adicionarNumeroAleatorio(board)
@@ -152,5 +168,7 @@ const inicializarJogo = () => {
     return { board, score: 0 }
 }
 
-                               
-    
+
+
+
+
