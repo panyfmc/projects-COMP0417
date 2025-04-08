@@ -66,11 +66,11 @@ const moverBaixo = (estado)=>{
         const filtrada = colValores.filter(num => num !== 0)
         const preenchida = Array(4 - filtrada.length).fill(0).concat(filtrada) //preenche com zero no inicio
         const invertida = preenchida.reverse() //  inverte antes de combinar
-        const {novaColuna , novaPontuacao} = combinarColuna(preenchida,4,novoScore)
+        const {novaColuna , novaPontuacao} = combinarColuna(invertida,4,novoScore)
         const resultado = novaColuna.reverse() //  volta à ordem original
 
         for (let x = 0; x<4;x++){
-            novoBoard[coluna + x *4] = novaColuna[x]
+            novoBoard[coluna + x *4] = resultado[x]
         }
         novoScore = novaPontuacao
     }
