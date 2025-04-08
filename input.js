@@ -40,7 +40,7 @@ const moverCima = (estado)=>{
     const novoBoard = [...board]
     let novoScore = score
     for (let coluna = 0; coluna < 4; coluna++) {
-        const {board,score} = estado
+        //const {board,score} = estado
         // Pega os valores das colunas e cria um array pra facilitar a remoção dos zeros
         const colValores = [board[coluna], board[coluna + 4], board[coluna + 8], board[coluna + 12]]
         const filtrada = colValores.filter(num => num !== 0)// remove os zeros 
@@ -65,7 +65,10 @@ const moverBaixo = (estado)=>{
         const colValores = [board[coluna], board[coluna +4],board[coluna + 8], board[coluna + 12]]
         const filtrada = colValores.filter(num => num !== 0)
         const preenchida = Array(4 - filtrada.length).fill(0).concat(filtrada) //preenche com zero no inicio
+        const invertida = preenchida.reverse() //  inverte antes de combinar
         const {novaColuna , novaPontuacao} = combinarColuna(preenchida,4,novoScore)
+        const resultado = novaColuna.reverse() //  volta à ordem original
+
         for (let x = 0; x<4;x++){
             novoBoard[coluna + x *4] = novaColuna[x]
         }
@@ -135,14 +138,29 @@ const verificarGameOver = (estado) =>
         : { ...estado, mensagem: "Você Perdeu!" }  // Se não houver espaços vazios, ou zero, o jogador perdeu
 
 
-const atualizarEstado = (evento, estado) => { // Atualiza o estado do jogo, se houve vitória, derrota
-    const novoEstado = verificarGameOver(verificarVitoria(controlarTecla(evento, estado)))
-    if (novoEstado.mensagem) { // Chamamos o clear() para parar o jogo se houver vitória ou derrota
-        clear()  
-    }
-
-    return novoEstado
-}
+        const atualizarEstado = (evento, estado) => {
+            const novoEstadoBase = controlarTecla(evento, estado)
+        
+            // Verifica se o board mudou após o movimento
+            const mudou = JSON.stringify(estado.board) !== JSON.stringify(novoEstadoBase.board)
+        
+            // Só adiciona número se o board mudou
+            const boardFinal = mudou 
+                ? adicionarNumeroAleatorio(novoEstadoBase.board) 
+                : novoEstadoBase.board
+        
+            const novoEstado = verificarGameOver(verificarVitoria({
+                ...novoEstadoBase,
+                board: boardFinal
+            }))
+        
+            if (novoEstado.mensagem) {
+                clear() // para o jogo
+            }
+        
+            return novoEstado
+        }
+        
 
 const adicionarNumeroAleatorio = (board) => {
     const posicoesVazias = board
