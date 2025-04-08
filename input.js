@@ -79,36 +79,39 @@ const moverBaixo = (estado)=>{
 
 
 const combinarLinha = (quadrados, pontuacao) => {
-    return quadrados.reduce(({ novaLinha, novaPontuacao }, valor, indice, array) => {    // Usa o método reduce para processar o array de quadrados
-        if (indice < 3 && valor === array[indice + 1]) { // Verifica se o índice está dentro do limite da linha e se os valores consecutivos são iguais
-            return {
-                novaLinha: [...novaLinha.slice(0, indice), valor * 2, 0, ...novaLinha.slice(indice + 2)],   // Cria uma nova linha combinando os valores e substituindo o segundo valor por 0
-                novaPontuacao: novaPontuacao + valor * 2 // Atualiza a pontuação somando o novo valor combinado
-            }
+    let novaLinha = [...quadrados]
+    let novaPontuacao = pontuacao
+
+    for (let i = 3; i > 0; i--) { // Itera da direita para a esquerda
+        if (novaLinha[i] !== 0 && novaLinha[i] === novaLinha[i - 1]) {
+            novaLinha[i] *= 2 // Combina os valores
+            novaLinha[i - 1] = 0 // Zera o valor combinado
+            novaPontuacao += novaLinha[i] // Atualiza a pontuação
         }
-        return { novaLinha, novaPontuacao }  // Se não houver combinação, mantém a linha e a pontuação sem alterações
-    }, { 
-        // Inicializa o acumulador com a cópia do array original e a pontuação fornecida
-        novaLinha: [...quadrados], 
-        novaPontuacao: pontuacao 
-    })
+    }
+
+    // Remove os zeros e preenche com zeros à esquerda
+    novaLinha = Array(4 - novaLinha.filter(num => num !== 0).length).fill(0).concat(novaLinha.filter(num => num !== 0))
+
+    return { novaLinha, novaPontuacao }
 }
 
-
 const combinarColuna = (quadrados, largura, pontuacao) => {
-    return quadrados.reduce(({ novaColuna, novaPontuacao }, valor, indice, array) => {  // Usa reduce para processar o array de quadrados na vertical
-        if (indice < 12 && valor === array[indice + largura]) { // Verifica se o índice está dentro do limite da coluna e se os valores na mesma coluna são iguais
-            return {
-                novaColuna: [...novaColuna.slice(0, indice), valor * 2, 0, ...novaColuna.slice(indice + largura + 1)], // Cria uma nova coluna combinando os valores e substituindo o valor abaixo por 0
-                novaPontuacao: novaPontuacao + valor * 2  // Atualiza a pontuação somando o novo valor combinado
-            }
+    let novaColuna = [...quadrados]
+    let novaPontuacao = pontuacao
+
+    for (let i = largura - 1; i > 0; i--) { // Itera de baixo para cima
+        if (novaColuna[i] !== 0 && novaColuna[i] === novaColuna[i - 1]) {
+            novaColuna[i] *= 2 // Combina os valores
+            novaColuna[i - 1] = 0 // Zera o valor combinado
+            novaPontuacao += novaColuna[i] // Atualiza a pontuação
         }
-        return { novaColuna, novaPontuacao }   // Se não houver combinação, mantém a coluna e a pontuação sem alterações.
-    }, { 
-        // Inicializa o objeto acumulador com a cópia do array original e a pontuação fornecida
-        novaColuna: [...quadrados], 
-        novaPontuacao: pontuacao 
-    })
+    }
+
+    // Remove os zeros e preenche com zeros no topo
+    novaColuna = novaColuna.filter(num => num !== 0).concat(Array(4 - novaColuna.filter(num => num !== 0).length).fill(0))
+
+    return { novaColuna, novaPontuacao }
 }
 
 
