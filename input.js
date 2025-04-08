@@ -123,9 +123,9 @@ const controlarTecla = (evento, estado) => {
 }
 
 
-document.addEventListener("keydown", (evento) => { 
-    estado = atualizarEstado(evento, estado) // Atualiza o estado do jogo com base na tecla pressionada.
-})
+// document.addEventListener("keydown", (evento) => { 
+//     estado = atualizarEstado(evento, estado) // Atualiza o estado do jogo com base na tecla pressionada.
+// })
 
 const verificarVitoria = (estado) =>
     estado.board.some(valor => valor === 2048)
