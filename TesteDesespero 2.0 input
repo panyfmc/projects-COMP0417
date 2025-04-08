@@ -1,0 +1,106 @@
+// Funções de movimento
+
+const moverDireita = (estado) => {
+    const {board, score} = estado // Desestrutura estado
+    const novoBoard = []       // Novo tabuleiro vazio
+    let novoScore = score     // Copia pontuação atual
+
+    for (let i = 0; i < 4; i++) {     // Loop em cada linha
+        const linha = board.slice(i * 4,(i + 1) * 4)  // Extrai linha (4 elementos)
+        const filtrada = linha.filter((num) => num !== 0)  // Remove zeros
+        const preenchida = Array(4 - filtrada.length).fill(0).concat(filtrada)  // Alinha à direita
+        
+        const {novaLinha, novaPontuacao} = combinarLinha(preenchida, novoScore)  // Combina pares
+        novoBoard.push(...novaLinha)   // Adiciona linha processada
+        novoScore = novaPontuacao      // Atualiza score
+    }
+
+    return {board: novoBoard, score : novoScore} // Retorna novo estado
+}
+
+const moverEsquerda = (estado) =>{
+    const {board, score} = estado
+    const novoBoard = []
+    let novoScore = score
+
+    for (let i = 0; i<4;i++){
+        const linha = board.slice(i*4,(i+1)*4)   // Pega linha
+        const filtrada = linha.filter((num)=>num !== 0 )  // Remove zeros
+        const preenchida = filtrada.concat(Array(4 - filtrada.length).fill(0))  // Alinha à esquerda
+        
+        const invertida = [...preenchida].reverse()  // Inverte para combinar
+        const {novaLinha, novaPontuacao} = combinarLinha(invertida, novoScore)  // Combina como direita
+        const resultado = novaLinha.reverse()    // Reverte resultado
+        
+        novoBoard.push(...resultado)  // Adiciona linha processada
+        novoScore = novaPontuacao
+    }
+
+    return{board: novoBoard, score: novoScore}
+}
+
+const moverCima = (estado)=>{
+    const{board,score} = estado
+    const novoBoard = [...board]      // Clona tabuleiro
+    let novoScore = score
+
+    for (let coluna = 0; coluna < 4; coluna++) {
+        const colValores = [board[coluna], board[coluna + 4], board[coluna + 8], board[coluna + 12]  // Pega coluna
+        
+        const filtrada = colValores.filter(num => num !== 0)  // Remove zeros
+        const preenchida = filtrada.concat(Array(4 - filtrada.length).fill(0))  // Zeros na base
+        
+        const invertida = [...preenchida].reverse()  // Prepara para combinar
+        const {novaLinha, novaPontuacao} = combinarLinha(invertida, novoScore)  // Combina
+        const resultado = novaLinha.reverse()    // Reverte resultado
+        
+        for (let i = 0; i < 4; i++) {    // Atualiza coluna
+            novoBoard[coluna + i * 4] = resultado[i]
+        }
+        novoScore = novaPontuacao
+    }
+    
+    return {board: novoBoard, score: novoScore}
+}    
+
+const moverBaixo = (estado)=>{
+    const {board,score} = estado
+    const novoBoard = [...board]                 // Clona tabuleiro
+    let novoScore = score
+
+    for(let coluna = 0; coluna< 4; coluna++){
+        const colValores = [board[coluna], board[coluna +4],board[coluna + 8], board[coluna + 12]  // Pega coluna
+        
+        const filtrada = colValores.filter(num => num !== 0)  // Remove zeros
+        const preenchida = Array(4 - filtrada.length).fill(0).concat(filtrada)  // Zeros no topo
+        
+        const invertida = preenchida.reverse()   // Inverte para combinar
+        const {novaLinha, novaPontuacao} = combinarLinha(invertida, novoScore)  // Combina
+        const resultado = novaLinha.reverse()    // Reverte resultado
+
+        for (let x = 0; x<4;x++){               // Atualiza coluna
+            novoBoard[coluna + x *4] = resultado[x]
+        }
+        novoScore = novaPontuacao
+    }
+    return {board: novoBoard, score:novoScore}
+}
+
+const combinarLinha = (quadrados, pontuacao) => {
+    let novaLinha = [...quadrados]   // Clona array
+    let novaPontuacao = pontuacao
+
+    for (let i = 3; i > 0; i--) {      // Direita -> esquerda
+        if (novaLinha[i] !== 0 && novaLinha[i] === novaLinha[i - 1]) {
+            novaLinha[i] *= 2          // Combina valores
+            novaLinha[i - 1] = 0        // Zera posição anterior
+            novaPontuacao += novaLinha[i] // Atualiza score
+        }
+    }
+
+    // Remove zeros e realinha
+    const filtrada = novaLinha.filter(num => num !== 0)
+    novaLinha = Array(4 - filtrada.length).fill(0).concat(filtrada)
+
+    return { novaLinha, novaPontuacao }
+}
