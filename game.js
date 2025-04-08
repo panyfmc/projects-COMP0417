@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     
         const square = document.createElement("div")
-        square.innerHTML = 0        
+        square.innerHTML = " "        
         gridDisplay.appendChild(square) 
         squares.push(square)     
         createBoard(i + 1)
@@ -38,13 +38,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const atualizarDOM = () => {
         squares.forEach((square, index) => {
-            square.innerHTML = estado.board[index] // Atualiza o valor de cada célula com base no estado atual
-            square.className = `tile-${estado.board[index]}` // Adiciona uma classe para estilização (opcional)
+            const value = estado.board[index]
+            square.innerHTML = value === 0 ? " " : value  
+            square.className = `tile-${value}` 
         })
-        scoreDisplay.innerHTML = estado.score // Atualiza o placar
+        scoreDisplay.innerHTML = estado.score 
     }
 
-    createBoard() // Cria o tabuleiro chamando a função createBoard.
+
+    createBoard() 
 
     // Inicializa o estado do jogo com dois números aleatórios no tabuleiro.
     estado.board = squares.map(square => parseInt(square.innerHTML))
@@ -53,9 +55,9 @@ document.addEventListener("DOMContentLoaded", () => {
     document.addEventListener("keydown", (evento) => {
         const novoEstado = atualizarEstado(evento, estado) // Atualiza o estado do jogo com base na tecla pressionada
         if (novoEstado !== estado) {
-            estado = novoEstado // Atualiza o estado global
-            atualizarDOM() // Atualiza o DOM para refletir as mudanças no estado
-            generate() // Gera um novo número aleatório após o movimento
+            estado = novoEstado 
+            atualizarDOM() 
+            generate() 
         }
     })
 })
