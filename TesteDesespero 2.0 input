@@ -1,5 +1,3 @@
-// Funções de movimento
-
 const moverDireita = (estado) => {
     const {board, score} = estado // Desestrutura estado
     const novoBoard = []       // Novo tabuleiro vazio
