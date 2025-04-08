@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (novoEstado !== estado) {
             estado = novoEstado 
             atualizarDOM() 
-            generate() 
+           // generate() //Esse generate aqui que tava causando todo o desespero desse grupo slk
         }
     })
 })

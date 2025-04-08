@@ -1,118 +1,116 @@
 // Funções de movimento
+//Pela função de combinar linha estar com um problema, o jogo não estava funcionando corretamente.
+const moverDireita = (estado) => {
+    const { board, score } = estado // o estado atual do jogo
+    const novoBoard = [] 
+    let novoScore = score 
 
-const moverDireita = (estado) => {   //constante para atualizar o estado do jogo quando precisonar para direita
-    const {board, score} = estado
-    const novoBoard = []
-    let novoScore = score //novo score pra atualizar o score, adicionando a funcção de combinar os valores iguais
-    for (let i = 0; i < 4; i++) {    //for para percorrer todas as linhas do tabuleiro, não encontrei forma de fazer de outro jeito, e nem temos tempo
-        const linha = board.slice(i * 4,(i + 1) * 4) // pega uma das linhas da matriz(tabuleiro)
-        const filtrada = linha.filter((num) => num !== 0) //Cria uma nova matriz tirando os zeros
-        const preenchida = Array(4 - filtrada.length).fill(0).concat(filtrada)//cria uma nova matriz adicionando o 0 na esquerda, já que movemos tudo pra direita
-        const {novaLinha, novaPontuacao} = combinarLinha(preenchida, novoScore)
-        novoBoard.push(...novaLinha) //spread para copiar array e adiciona o tabuleiro novo
+    for (let i = 0; i < 4; i++) {
+        const linha = board.slice(i * 4, (i + 1) * 4).reverse() // pega a linha atual do tabuleiro e inverte a ordem dos números
+        const { novaLinha, novaPontuacao } = combinarLinha(linha, novoScore)// combina os números da linha
+        novoBoard.push(...novaLinha.reverse()) // adiciona a nova linha ao tabuleiro
         novoScore = novaPontuacao
     }
 
-    return {board: novoBoard, score : novoScore}
+    return { board: novoBoard, score: novoScore }
 }
 
 
-const moverEsquerda = (estado) =>{
-    const {board, score} = estado
+const moverEsquerda = (estado) => {
+    const { board, score } = estado
     const novoBoard = []
     let novoScore = score
 
-    for (let i = 0; i<4;i++){
-        const linha = board.slice(i*4,(i+1)*4)
-        const filtrada = linha.filter((num)=>num !== 0 )
-        const preenchida = filtrada.concat(Array(4 - filtrada.length).fill(0)) //agora adicionamos o zero no fim da array
-        const {novaLinha, novaPontuacao} = combinarLinha(preenchida, novoScore)
+    for (let i = 0; i < 4; i++) {
+        const linha = board.slice(i * 4, (i + 1) * 4) 
+        const { novaLinha, novaPontuacao } = combinarLinha(linha, novoScore)
         novoBoard.push(...novaLinha)
         novoScore = novaPontuacao
     }
 
-    return{board: novoBoard, score: novoScore}
+    return { board: novoBoard, score: novoScore }
 }
 
 
-const moverCima = (estado)=>{
-    const{board,score} = estado
+const moverCima = (estado) => {
+    const { board, score } = estado
     const novoBoard = [...board]
     let novoScore = score
-    for (let coluna = 0; coluna < 4; coluna++) {
-        //const {board,score} = estado
-        // Pega os valores das colunas e cria um array pra facilitar a remoção dos zeros
-        const colValores = [board[coluna], board[coluna + 4], board[coluna + 8], board[coluna + 12]]
-        const filtrada = colValores.filter(num => num !== 0)// remove os zeros 
-        const preenchida = filtrada.concat(Array(4 - filtrada.length).fill(0))// Preenche com zeros no final
-        const {novaColuna, novaPontuacao} = combinarColuna(preenchida, 4, novoScore) //combina os valores 4 é o tamanho do tab
-        for (let i = 0; i < 4; i++) { //for para atualizar os valores
-                novoBoard[coluna + i * 4] = novaColuna[i]
-            }
-            novoScore = novaPontuacao
-    }
-    
-    return {board: novoBoard, score: novoScore}
-}    
 
+    for (let col = 0; col < 4; col++) {
+        const coluna = [board[col], board[col + 4], board[col + 8], board[col + 12]]
+        const { novaColuna, novaPontuacao } = combinarColuna(coluna, novoScore)
 
-const moverBaixo = (estado)=>{
-    const {board,score} = estado
-    const novoBoard = [...board]
-    let novoScore = score
-    for(let coluna = 0; coluna< 4; coluna++){
-        const{board,score} = estado
-        const colValores = [board[coluna], board[coluna +4],board[coluna + 8], board[coluna + 12]]
-        const filtrada = colValores.filter(num => num !== 0)
-        const preenchida = Array(4 - filtrada.length).fill(0).concat(filtrada) //preenche com zero no inicio
-        const invertida = preenchida.reverse() //  inverte antes de combinar
-        const {novaColuna , novaPontuacao} = combinarColuna(invertida,4,novoScore)
-        const resultado = novaColuna.reverse() //  volta à ordem original
-
-        for (let x = 0; x<4;x++){
-            novoBoard[coluna + x *4] = resultado[x]
+        for (let i = 0; i < 4; i++) {
+            novoBoard[col + i * 4] = novaColuna[i]
         }
+
         novoScore = novaPontuacao
     }
-    return {board: novoBoard, score:novoScore}
+
+    return { board: novoBoard, score: novoScore }
 }
 
 
-const combinarLinha = (quadrados, pontuacao) => {
-    let novaLinha = [...quadrados]
-    let novaPontuacao = pontuacao
+const moverBaixo = (estado) => {
+    const { board, score } = estado
+    const novoBoard = [...board]
+    let novoScore = score
 
-    for (let i = 3; i > 0; i--) { // Itera da direita para a esquerda
-        if (novaLinha[i] !== 0 && novaLinha[i] === novaLinha[i - 1]) {
-            novaLinha[i] *= 2 // Combina os valores
-            novaLinha[i - 1] = 0 // Zera o valor combinado
-            novaPontuacao += novaLinha[i] // Atualiza a pontuação
+    for (let x = 0; x < 4; x++) {
+        const coluna = [board[x], board[x + 4], board[x + 8], board[x + 12]].reverse() //Pega as colunas e inverte a ordem dos números
+        const { novaColuna, novaPontuacao } = combinarColuna(coluna, novoScore)
+        const resultado = novaColuna.reverse()
+
+        for (let i = 0; i < 4; i++) {
+            novoBoard[x + i * 4] = resultado[i]
+        }
+
+        novoScore = novaPontuacao
+    }
+
+    return { board: novoBoard, score: novoScore }
+}
+
+
+
+const combinarLinha = (linha, pontuacao) => {
+    let novaLinha = linha.filter(num => num !== 0) // filtra os números diferentes de zero
+    let novaPontuacao = pontuacao 
+
+    for (let i = 0; i < novaLinha.length - 1; i++) { // um for pra percorrer a linha, combinar os iguais e somar a pontuação
+        if (novaLinha[i] === novaLinha[i + 1]) {
+            novaLinha[i] *= 2
+            novaPontuacao += novaLinha[i]
+            novaLinha[i + 1] = 0
         }
     }
 
-    // Remove os zeros e preenche com zeros à esquerda
-    novaLinha = Array(4 - novaLinha.filter(num => num !== 0).length).fill(0).concat(novaLinha.filter(num => num !== 0))
+    novaLinha = novaLinha.filter(num => num !== 0)
+    while (novaLinha.length < 4) novaLinha.push(0)
 
     return { novaLinha, novaPontuacao }
 }
 
-const combinarColuna = (quadrados, largura, pontuacao) => {
-    let novaColuna = [...quadrados]
+
+const combinarColuna = (coluna, pontuacao) => {
+    let novaColuna = coluna.filter(num => num !== 0)
     let novaPontuacao = pontuacao
 
-    for (let i = largura - 1; i > 0; i--) { // Itera de baixo para cima
-        if (novaColuna[i] !== 0 && novaColuna[i] === novaColuna[i - 1]) {
-            novaColuna[i] *= 2 // Combina os valores
-            novaColuna[i - 1] = 0 // Zera o valor combinado
-            novaPontuacao += novaColuna[i] // Atualiza a pontuação
+    for (let i = 0; i < novaColuna.length - 1; i++) {
+        if (novaColuna[i] === novaColuna[i + 1]) {
+            novaColuna[i] *= 2
+            novaPontuacao += novaColuna[i]
+            novaColuna[i + 1] = 0
         }
     }
 
-    // Remove os zeros e preenche com zeros no topo
-    novaColuna = novaColuna.filter(num => num !== 0).concat(Array(4 - novaColuna.filter(num => num !== 0).length).fill(0))
+    novaColuna = novaColuna.filter(num => num !== 0)
+    while (novaColuna.length < 4) novaColuna.push(0)
 
     return { novaColuna, novaPontuacao }
 }
+
 
 
 const controlarTecla = (evento, estado) => {
