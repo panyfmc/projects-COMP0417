@@ -6,8 +6,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const resultDisplay = document.querySelector("#result") // mensagens como "You WIN!" ou "You LOSE!" serão exibidas.
     const width = 4     // largura do tabuleiro (4x4).
     const squares = []  // as células do tabuleiro.
-     const restartButton = document.querySelector("#restart")
-     restartButton.addEventListener("click", reiniciarJogo)
 
     const generate = () => {
         const emptySquares = squares.filter(square => square.innerHTML == 0)
@@ -62,16 +60,6 @@ document.addEventListener("DOMContentLoaded", () => {
            // generate() //Esse generate aqui que tava causando todo o desespero desse grupo slk
         }
     })
-
-    const reiniciarJogo = () => {
-        estado = inicializarJogo()
-        resultDisplay.innerHTML = ""
-        gridDisplay.innerHTML = ""
-        squares.splice(0, squares.length)
-        
-        createBoard()
-        atualizarDOM()
-    }
 })
 
 
