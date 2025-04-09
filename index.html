@@ -7,7 +7,11 @@
 </head>
 <body>
 
-<div class="container">
+<div id="iniciar-tela" class="iniciar-tela">
+    <button id="botao-iniciar">Iniciar Jogo</button> 
+</div>
+
+<div id="game-container" class="container hidden"> 
     <div class="info">
         <h1>2048</h1>
         <div class="score-container">
@@ -16,11 +20,13 @@
         </div>
     </div>
 
-    <div class="grid"></div>
+    <button id="botao-reiniciar">Reiniciar Jogo</button> 
 
+    <div class="grid"></div>
 </div>
-    <script src="game.js"></script>
-    <script src="input.js"></script>
+
+<script src="game.js"></script>
+<script src="input.js"></script>
 
 </body>
 </html>
