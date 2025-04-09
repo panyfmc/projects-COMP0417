@@ -124,10 +124,6 @@ const controlarTecla = (evento, estado) => {
 }
 
 
-// document.addEventListener("keydown", (evento) => { 
-//     estado = atualizarEstado(evento, estado) // Atualiza o estado do jogo com base na tecla pressionada.
-// })
-
 const verificarVitoria = (estado) =>
     estado.board.some(valor => valor === 2048)
         ? { ...estado, mensagem: "Você Ganhou" }  // Quando o valor final for 2048, define mensagem de vitória
@@ -184,7 +180,7 @@ const inicializarJogo = () => {
     board = adicionarNumeroAleatorio(board)
     board = adicionarNumeroAleatorio(board)
     
-    return { board, score: 0 }
+    return {board, score: 0}
 }
 
 
