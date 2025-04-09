@@ -1,5 +1,13 @@
 // Funções de movimento
 //Pela função de combinar linha estar com um problema, o jogo não estava funcionando corretamente.
+const botaoVoltarInicio = document.getElementById("botao-voltar-inicio") // Corrigido o seletor
+
+botaoVoltarInicio.addEventListener("click", () => {
+    document.getElementById("game-over").classList.add("hidden") // Oculta a tela de Game Over
+    document.getElementById("game-container").classList.add("hidden") // Oculta o jogo
+    document.getElementById("iniciar-tela").classList.remove("hidden") // Exibe a tela inicial
+});
+
 const moverDireita = (estado) => {
     const { board, score } = estado // o estado atual do jogo
     const novoBoard = [] 
@@ -143,7 +151,7 @@ const verificarGameOver = (estado) => {
     const semMovimentos = semMovimentosPossiveis(estado.board)
 
     if (semZeros && semMovimentos) {
-        document.getElementById("game-over").classList.remove("hidden")
+        document.getElementById("game-over").classList.remove("hidden") // Exibe a tela de Game Over
         return { ...estado, mensagem: "Você perdeu" }
     }
 
