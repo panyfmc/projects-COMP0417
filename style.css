@@ -96,6 +96,10 @@ h1 {
     justify-content: center;
 }
 .iniciar-tela {
+    display: flex;
+    flex-direction: column; /* Alinha os elementos verticalmente */
+    justify-content: center;
+    align-items: center;
     text-align: center;
     padding: 30px;
     animation: fadeIn 1s ease-in;
@@ -106,18 +110,18 @@ h1 {
     margin-bottom: 20px;
     color: var(--cor-texto);
     font-family: 'Press Start 2P', sans-serif;
-    font-size: 10px;
+    font-size: 14px;
     line-height: 1.6;
     padding: 0 20px;
 }
 .regras h2.neon-title,
 .regras h3.neon-subtitle {
-    color: var(--cor-destaque);
+    color: #ff007f;
     text-shadow: 0 0 5px var(--cor-destaque),
                  0 0 10px var(--cor-destaque),
                  0 0 20px var(--cor-destaque);
     animation: blink-neon 1.5s infinite alternate;
-    font-size: 14px;
+    font-size: 18px;
 }
 @keyframes blink-neon {
     0% {
@@ -214,26 +218,43 @@ h1 {
 
 .iniciar-tela {
     display: flex;
+    flex-direction: column; /* Alinha os elementos verticalmente */
     justify-content: center;
     align-items: center;
-    /* background-color: var(--cor-fundo); */
+    text-align: center;
+    margin-top: 20px;
+    animation: fadeIn 1s ease-in;
+    transition: opacity 0.8s ease;
 }
 
 .iniciar-tela button {
-    font-size: 40px;
-
-    padding: 10px 20px;
+    font-size: 30px;
+    padding: 15px 30px;
+    margin-top: 20px; /* Espaço entre as regras e o botão */
     background-color: var(--cor-destaque);
     color: var(--cor-texto);
-    border: none;
+    border: 3px solid var(--cor-destaque);
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    font-family: 'Press Start 2P', sans-serif; /* Estilo pixelado */
+    transition: transform 0.3s, box-shadow 0.3s;
+    animation: borda-piscar 1.5s infinite alternate; /* Animação de borda piscando */
 }
 
 .iniciar-tela button:hover {
-    background-color: var(--cor-hover);
+    transform: scale(1.1) translateY(-5px); /* Efeito de "saltar" */
+    box-shadow: 0 0 15px var(--cor-hover), 0 0 30px var(--cor-hover); /* Brilho ao passar o cursor */
+}
 
+@keyframes borda-piscar {
+    0% {
+        border-color: var(--cor-destaque);
+        box-shadow: 0 0 5px var(--cor-destaque);
+    }
+    100% {
+        border-color: var(--cor-hover);
+        box-shadow: 0 0 15px var(--cor-hover);
+    }
 }
 
 /* Oculta tabuleiro, deixando apenas o botão iniciar jogo */
