@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const gridDisplay = document.querySelector(".grid")     // o contêiner do tabuleiro do jogo.
     const scoreDisplay = document.querySelector("#score")   // onde o placar será exibido
-    const resultDisplay = document.querySelector("#result") // mensagens como "You WIN!" ou "You LOSE!" serão exibidas.
+    const resultDisplay = document.querySelector("#result") 
     const restartButton = document.querySelector("#botao-reiniciar") // Seleciona o botão de reiniciar
     const width = 4     // largura do tabuleiro (4x4).
     const squares = []  // as células do tabuleiro.
