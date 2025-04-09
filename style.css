@@ -1,8 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
-/* Estilos para o tema neon retro com cores vibrantes e contrastantes */
-/* Inspirado em jogos de arcade e estética cyberpunk */
 :root {
     /* Cores principais */
     --cor-fundo: #021c4af5;  /* Azul escuro */
@@ -41,12 +39,6 @@ h1 {
     font-size: 40px;
     line-height: 0.9;
     color: #f5e100;
-    margin: 0;
-    /* animation: jump 0.4s infinite ease-in-out; */
-}
-
-p, h2 {
-    margin: 0;
 }
 
 .container {
@@ -63,7 +55,6 @@ p, h2 {
 
 .text-container p {
     font-size: 20px;
-    color: #ffffff;
     margin-bottom: 10px;
     letter-spacing: 1px;
     line-height: 1.2;
@@ -103,7 +94,6 @@ p, h2 {
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: background-color 0.6s, color 0.2s;
 }
 
 .tile-0 {
@@ -113,23 +103,51 @@ p, h2 {
 
 .score-container {
     text-align: center;
-    width: 80px;
-    height: 60px;
     border-radius: 3px;
+    width: auto;
+    height: 65px;
     background-color: #00ffb382;
     color: #ff007f;
-    gap: 5px;
 }
 
 #score {
     font-size: 30px;
     animation: blink 0.6s infinite alternate;
     color: #ff5c8d;
+    margin: 0;
 }
 
 .score-title {
-    margin-top: 5px;
     font-size: 10px;
     color: #00d1b2;
+}
+
+.iniciar-tela {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* background-color: var(--cor-fundo); */
+}
+
+.iniciar-tela button {
+    font-size: 40px;
+
+    padding: 10px 20px;
+    background-color: var(--cor-destaque);
+    color: var(--cor-texto);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.iniciar-tela button:hover {
+    background-color: var(--cor-hover);
+
+}
+
+/* Oculta tabuleiro, deixando apenas o botão iniciar jogo */
+.hidden {
+    display: none;
 }
 
