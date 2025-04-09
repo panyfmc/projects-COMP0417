@@ -1,4 +1,12 @@
 let estado = { board: [], score: 0 } // Inicializa o estado com um tabuleiro vazio e pontuação 0.
+document.getElementById("botao-iniciar").addEventListener("click", function () {
+    const telaInicio = document.getElementById("iniciar-tela");
+    const containerJogo = document.getElementById("game-container");
+
+    telaInicio.classList.add("hidden");
+    containerJogo.classList.remove("hidden");
+    containerJogo.classList.add("show");
+});
 
 document.addEventListener("DOMContentLoaded", () => {
     const startScreen = document.getElementById("iniciar-tela");

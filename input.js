@@ -132,7 +132,8 @@ const verificarVitoria = (estado) =>
 const verificarGameOver = (estado) =>
     estado.board.includes(0)
         ? estado  // Se ainda houver zeros, o jogo continua, ou seja, se houver espaços vazios.
-        : { ...estado, mensagem: "Você Perdeu!" }  // Se não houver espaços vazios, ou zero, o jogador perdeu
+        : { ...estado, mensagem: document.getElementById("game-over").classList.remove("hidden")
+        }  // Se não houver espaços vazios, ou zero, o jogador perdeu
 
 
         const atualizarEstado = (evento, estado) => {
@@ -182,6 +183,7 @@ const inicializarJogo = () => {
     
     return {board, score: 0}
 }
+
 
 
 

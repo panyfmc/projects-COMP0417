@@ -9,10 +9,10 @@
 
     <div id="iniciar-tela" class="iniciar-tela">
         <div class="regras">
-            <h2>Objetivo do Jogo</h2>
+            <h2 class="neon-title">Objetivo do Jogo</h2>
             <p>Combine blocos de mesmo valor até alcançar o número <strong>2048</strong>!</p>
     
-            <h3>Regras Básicas:</h3>
+            <h3 class="neon-subtitle">Regras Básicas:</h3>
             <ul>
                 <li>Use as <strong>setas do teclado</strong> para mover os blocos.</li>
                 <li>Quando dois blocos com o mesmo número colidem, eles se <strong>combinam</strong>.</li>
@@ -24,7 +24,11 @@
         <button id="botao-iniciar">Iniciar Jogo</button> 
     </div>
     
-
+    <div id="game-over" class="game-over hidden">
+        <h2>Game Over</h2>
+        <p>Sem mais movimentos disponíveis!</p>
+    </div>
+    
 <div id="game-container" class="container hidden"> 
     <div class="info">
         <h1>2048</h1>
