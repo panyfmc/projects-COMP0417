@@ -246,6 +246,57 @@ h1 {
     box-shadow: 0 0 15px var(--cor-hover), 0 0 30px var(--cor-hover); /* Brilho ao passar o cursor */
 }
 
+.game-container button {
+    font-size: 30px;
+    padding: 15px 30px;
+    margin-top: 20px; /* Espaço entre as regras e o botão */
+    background-color: var(--cor-destaque);
+    color: var(--cor-texto);
+    border: 3px solid var(--cor-destaque);
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Press Start 2P', sans-serif; /* Estilo pixelado */
+    transition: transform 0.3s, box-shadow 0.3s;
+    animation: borda-piscar 1.5s infinite alternate; /* Animação de borda piscando */
+}
+
+#botao-reiniciar {
+    font-size: 10px;
+    padding: 10px 10px;
+    background-color: #00d1b2;
+    color: var(--cor-texto);
+    border: 3px solid #f5e100;
+    border-radius: 2px;
+    cursor: pointer;
+    font-family: 'Press Start 2P', sans-serif; /* Estilo pixelado */
+    transition: transform 0.3s, box-shadow 0.3s;
+    animation: borda-piscar 1.5s infinite alternate; /* Animação de borda piscando */
+}
+
+#botao-reiniciar:hover {
+    transform: scale(1.1) translateY(-5px); /* Efeito de "saltar" */
+    box-shadow: 0 0 10px var(--cor-hover), 0 0 10px var(--cor-hover); /* Brilho ao passar o cursor */
+}
+
+#botao-voltar-inicio {
+    font-size: 20px;
+    padding: 10px 20px;
+    margin-top: 15px;
+    background-color: var(--cor-destaque);
+    color: var(--cor-texto);
+    border: 3px solid var(--cor-destaque);
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Press Start 2P', sans-serif; /* Estilo pixelado */
+    transition: transform 0.3s, box-shadow 0.3s;
+    animation: borda-piscar 1.5s infinite alternate; /* Animação de borda piscando */
+}
+
+#botao-voltar-inicio:hover {
+    transform: scale(1.1) translateY(-5px); /* Efeito de "saltar" */
+    box-shadow: 0 0 15px var(--cor-hover), 0 0 30px var(--cor-hover); /* Brilho ao passar o cursor */
+}
+
 @keyframes borda-piscar {
     0% {
         border-color: var(--cor-destaque);
