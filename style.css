@@ -116,7 +116,7 @@ h1 {
     text-shadow: 0 0 5px var(--cor-destaque),
                  0 0 10px var(--cor-destaque),
                  0 0 20px var(--cor-destaque);
-    animation: blink-neon 1.5s infinite alternate;
+    animation: blink-neon 1.0s infinite alternate;
     font-size: 14px;
 }
 @keyframes blink-neon {
