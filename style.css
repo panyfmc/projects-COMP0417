@@ -95,6 +95,30 @@ h1 {
     align-items: center;
     justify-content: center;
 }
+.regras {
+    text-align: center;
+    margin-bottom: 20px;
+    color: var(--cor-texto);
+    font-family: 'Press Start 2P', sans-serif;
+    font-size: 10px;
+    line-height: 1.6;
+    padding: 0 20px;
+}
+
+.regras h2, .regras h3 {
+    color: var(--cor-destaque);
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.regras ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.regras li {
+    margin-bottom: 6px;
+}
 
 .tile-0 {
     background-color: #021c4af5;
