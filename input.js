@@ -151,7 +151,7 @@ const verificarGameOver = (estado) => {
     const semMovimentos = semMovimentosPossiveis(estado.board)
 
     if (semZeros && semMovimentos) {
-        document.getElementById("game-over").classList.remove("hidden") // Exibe a tela de Game Over
+        document.getElementById("game-over").classList.remove("hidden")
         return { ...estado, mensagem: "Você perdeu" }
     }
 
