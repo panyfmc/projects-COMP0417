@@ -128,13 +128,27 @@ const verificarVitoria = (estado) =>
     estado.board.some(valor => valor === 2048)
         ? { ...estado, mensagem: "Você Ganhou" }  // Quando o valor final for 2048, define mensagem de vitória
         : estado
+    const semMovimentosPossiveis = (board) => {
+        for (let i = 0; i < 16; i++) {
+            const valor = board[i]
+            const direita = (i % 4 !== 3) && board[i + 1] === valor // mesmo valor à direita
+            const baixo = (i < 12) && board[i + 4] === valor       // mesmo valor abaixo
+            if (direita || baixo) return false
+        }
+        return true
+        }
+        
+const verificarGameOver = (estado) => {
+    const semZeros = !estado.board.includes(0)
+    const semMovimentos = semMovimentosPossiveis(estado.board)
 
-const verificarGameOver = (estado) =>
-    estado.board.includes(0)
-        ? estado  // Se ainda houver zeros, o jogo continua, ou seja, se houver espaços vazios.
-        : { ...estado, mensagem: document.getElementById("game-over").classList.remove("hidden")
-        }  // Se não houver espaços vazios, ou zero, o jogador perdeu
+    if (semZeros && semMovimentos) {
+        document.getElementById("game-over").classList.remove("hidden")
+        return { ...estado, mensagem: "Você perdeu" }
+    }
 
+    return estado
+}
 
         const atualizarEstado = (evento, estado) => {
             const novoEstadoBase = controlarTecla(evento, estado)
